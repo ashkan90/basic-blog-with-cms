@@ -1,14 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-	@include('admin.includes.error')
 	<div class="card">
 		  <div class="card-header">
 		    Update Category: {{$category->name}} 
 		  </div>
 
 		  <div class="card-body">
-			    <form method="post" action="{{ route('category.update', ['id' => $category->id]) }}" >
+			    <form method="post" action="{{ route('update.category', ['id' => $category->id]) }}" >
 			    	{{csrf_field()}}
 			    	<div class="form-group">
 			    		<label for="name">Category Name</label>

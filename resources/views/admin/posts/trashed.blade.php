@@ -15,11 +15,11 @@
 					@if($posts->count() > 0)
 						@foreach($posts as $post)
 							<tr>
-								<td><img src="{{ $post->featured }}" alt="{{ $post->title }}" width="50px" height="50px"></td>
+								<td><img src="{{ asset($post->featured) }}" alt="{{ $post->title }}" width="50px" height="50px"></td>
 								<td>{{$post->title}}</td>
 								<td><a href="#" class="btn btn-info">Edit</a></td>
-								<td><a href="{{ route('post.restore',['id' => $post->id]) }}" class="btn btn-success">Restore</a></td>
-								<td><a href="{{ route('post.kill',['id' => $post->id]) }}" class="btn btn-danger">Delete</a></td>
+								<td><a href="{{ route('restore.post',['id' => $post->id]) }}" class="btn btn-success">Restore</a></td>
+								<td><a href="{{ route('kill.post',['id' => $post->id]) }}" class="btn btn-danger">Delete</a></td>
 							</tr>
 						@endforeach
 					@else

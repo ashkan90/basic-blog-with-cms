@@ -7,7 +7,7 @@
 		  </div>
 
 		  <div class="card-body">
-			    <form method="post" action="{{ route('category.store') }}" >
+			    <form method="post" action="{{ route('store.category') }}" >
 			    	{{csrf_field()}}
 			    	<div class="form-group">
 			    		<label for="name">Category Name</label>

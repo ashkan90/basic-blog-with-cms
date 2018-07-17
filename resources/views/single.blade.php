@@ -1,166 +1,111 @@
-@extends('layouts.frontend')
+<!DOCTYPE html>
+<html>
+<title>{{ $site->title }} - {{ $post->title }}</title>
+@include('includes.import.head')
+<body>
+	@include('includes.header')	
+	<!-- Start Content -->
 
-@section('title')
-<div class="stunning-header stunning-header-bg-lightviolet">
-    <div class="stunning-header-content">
-        <h1 class="stunning-header-title">{{ $title }}</h1>
-    </div>
-</div>
-@endsection
+	<div class="main">
+		<!-- Start Post Title and Subtitle -->	
+		<section class="main-t">
+			<h1> {{ $post->title }} </h1>
+			<h4> SubTitle </h4>
+		</section>
+		<!-- End Post Title and Subtitle -->	
+		
+		<div class="container">
 
+		<div class="row">
 
-@section('content')
-<div class="container">
-    <div class="row medium-padding120">
-        <main class="main">
-            <div class="col-lg-10 col-lg-offset-1">
-                <article class="hentry post post-standard-details">
+			<div class="col-lg-9 col-md-8 col-xs-12 col-sm-12">
 
-                    <div class="post-thumb">
-                        <img src="{{ $post->featured }}" alt="{{ $post->title }}">
-                    </div>
+				<article class="main-d post">
+					<div class="img">
+					<img src="{{ asset($post->featured) }}" alt="{{ $post->title }}">
+					<div class="share">
+					<div class="activ-s">
+					<ul class="btn-s">
+					<li>
+						<a target="_blank" href=""><i class="fa fa-facebook"></i> 
+						</a>
+					</li>
+					<li>
+						<a target="_blank" href=""><i class="fa fa-twitter"></i> 
+						</a>
+					</li>
+					<li>
+						<a target="_blank" href=""><i class="fa fa-google-plus"></i>
+						</a>
+					</li>
+					<li>
+						<a target="_blank" href=""><i class="fa fa-linkedin"></i></a>
+					</li>
+					<li>
+						<a target="_blank" href=""><i class="fa fa-reddit"></i></a>
+					</li>
+					<li>
+						<a target="_blank" href="mailto"><i class="fa fa-envelope-o"></i>
+						</a>
+					</li>
+					</ul>
+					<i class="fa fa-share-alt"></i>
+					</div>
+					</div>
+					</div>
 
-                    <div class="post__content">
+					<div class="content post">
+						<span class="badge badge-pill badge-success">
+			                Author: {{ ucfirst($post->user->name) }}
+			            </span>&nbsp;&nbsp;&nbsp;
 
+		            	<span class="badge badge-default">
+						{{ $post->category->name }}
+						</span>					
+						<h2><span>{{ $post->title }}</span></h2>
+						{!! $post->content !!}
+						</br>
+						<h3><span>Share this entry</span></h3>
+						<a href="" class="icon-link facebook fill"><i class="fa fa-facebook"></i>
+						</a>
+						<a href="" class="icon-link linkedin fill"><i class="fa fa-linkedin"></i>
+						</a>
+						<a href="" class="icon-link twitter fill"><i class="fa fa-twitter"></i>
+						</a>
+						<a href="" class="icon-link google-plus fill"><i class="fa fa-google-plus"></i>
+						</a>
+						<a href="" class="icon-link reddit fill"><i class="fa fa-reddit"></i>
+						</a>
+						<a href="" class="icon-link tumblr fill"><i class="fa fa-tumblr"></i>
+						</a>						
+						<a href="" class="icon-link pinterest fill"><i class="fa fa-pinterest"></i>
+						</a>
+						<a href="mailto" class="icon-link envelope fill"><i class="fa fa-envelope"></i>
+						</a>
+						<div class="text-center">
+							@foreach($post->tags()->get() as $tags)
+								<a href="{{ route('tag', ['tag' => $tags->slug]) }}">
+									<span class="badge badge-pill badge-success">
+										{{ $tags->tag }}
+									</span>
+								</a>
+							@endforeach
+						</div>
+					</div>
+					<!-- comment -->
+				
+				</article>
 
-                        <div class="post-additional-info">
+			</div>
 
-                            <div class="post__author author vcard">
-                                Posted by
+			@include('includes.import.sidebar')
 
-                                <div class="post__author-name fn">
-                                    <a href="#" class="post__author-link">{{$post->user->name}}</a>
-                                </div>
+		</div>
 
-                            </div>
+		</div>
+	</div>
+	<!-- End Content -->
 
-                            <span class="post__date">
-
-                                <i class="seoicon-clock"></i>
-
-                                <time class="published" datetime="2016-03-20 12:00:00">
-                                    {{ $post->created_at->toFormattedDateString() }}
-                                </time>
-
-                            </span>
-
-                            <span class="category">
-                                <i class="seoicon-tags"></i>
-                                <a href="{{ route('post.single', ['category' => $post->category->name, 'slug' => $post->slug]) }}">{{$post->category->name}}</a>
-                            </span>
-
-                        </div>
-
-                        <div class="post__content-info">
-
-                            <p class="post__text">{!! $post->content !!}
-                            </p>
-
-                            <div class="widget w-tags">
-                                <div class="tags-wrap">
-                                	@foreach($post->tags as $tags)
-                                    <a href="{{ route('tag.single', ['tag' => $tags->tag]) }}" class="w-tags-item">{{ $tags->tag }}</a>
-                                    @endforeach
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div class="socials text-center">
-                        <div class="addthis_inline_share_toolbox"></div>
-                    </div>
-
-                </article>
-
-                <div class="blog-details-author">
-
-                    <div class="blog-details-author-thumb">
-                        <img style="width: 6em; height: 6em; border-radius: 50%" src="{{asset($post->user->profile->avatar)}}" alt="Author">
-                    </div>
-
-                    <div class="blog-details-author-content">
-                        <div class="author-info">
-                            <h5 class="author-name">{{$post->user->name}}</h5>
-                            <p class="author-info">SEO Specialist</p>
-                        </div>
-                        <p class="text">{{$post->user->profile->about}}
-                        </p>
-                        <div class="socials">
-
-                            <a href="{{ $post->user->profile->facebook }}" class="social__item">
-                                <img src="{{ asset('app/svg/circle-facebook.svg') }}" alt="facebook">
-                            </a>
-
-                            <a href="{{ $post->user->profile->twitter }}" class="social__item">
-                                <img src="{{ asset('app/svg/twitter.svg') }}" alt="twitter">
-                            </a>
-
-                            <a href="#" class="social__item">
-                                <img src="{{ asset('app/svg/google.svg') }}" alt="google">
-                            </a>
-
-                            <a href="#" class="social__item">
-                                <img src="{{ asset('app/svg/youtube.svg') }}" alt="youtube">
-                            </a>
-
-                        </div>
-                    </div>
-                </div>
-
-                <div class="pagination-arrow">
-
-                	@if($next_post)
-                    <a href="{{ route('post.single', ['category' => $post->category->name, 'slug' => $next_post->slug]) }}" class="btn-prev-wrap">
-                        <svg class="btn-prev">
-                            <use xlink:href="#arrow-left"></use>
-                        </svg>
-                        <div class="btn-content">
-                            <div class="btn-content-title">Previous Post</div>
-                            <p class="btn-content-subtitle">{{ $next_post->title }}</p>
-                        </div>
-                    </a>
-                    @endif
-
-
-                    @if($prev_post)
-                    <a href="{{ route('post.single', ['category' => $post->category->name, 'slug' => $prev_post->slug]) }}" class="btn-next-wrap">
-                        <div class="btn-content">
-                            <div class="btn-content-title">Next Post</div>
-                            <p class="btn-content-subtitle">{{ $prev_post->title }}</p>
-                        </div>
-                        <svg class="btn-next">
-                            <use xlink:href="#arrow-right"></use>
-                        </svg>
-                    </a>
-                	@endif
-
-                </div>
-
-                <div class="comments">
-
-                    <div class="heading text-center">
-                        <h4 class="h1 heading-title">Comments</h4>
-                        <div class="heading-line">
-                            <span class="short-line"></span>
-                            <span class="long-line"></span>
-                        </div>
-                    </div>
-                    @include('includes.disqus')
-                </div>
-
-                <div class="row">
-
-                </div>
-
-
-            </div>
-
-            <!-- End Post Details -->
-
-            @include('includes.sidebar')
-
-        </main>
-    </div>
-</div>
-@endsection
+	@include('includes.import.footer')
+</body>
+</html>

@@ -8,35 +8,24 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Kafa Kafaya') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="{{ asset('assets/js/app.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
-
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script>
-
-    @yield('styles')
+    <link href="{{ asset('assets/css/app.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    {{ config('app.name', 'Kafa Kafaya') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -87,10 +76,10 @@
                     <div class="col-md-3 py-4">
                         <ul class="list-group">
                             <li class="list-group-item">
-                                <a href="{{route('dashboard')}}">Home</a>
+                                <a href="{{route('home')}}">Home</a>
                             </li>
                             <li class="list-group-item">
-                                <a href="{{route('user.profile')}}">My Profile</a>
+                                <a href="{{route('user.profile', ['id' => Auth::user()->name])}}">My Profile</a>
                             </li>
                             @if(Auth::user()->admin)
                             <li class="list-group-item">
@@ -110,19 +99,19 @@
                                 <a href="{{route('posts')}}">All Posts</a>
                             </li>
                             <li class="list-group-item">
-                                <a href="{{route('post.trashed')}}">Trashed Posts</a>
+                                <a href="{{route('trashed.post')}}">Trashed Posts</a>
                             </li>
                             <li class="list-group-item">
-                                <a href="{{route('menu.create')}}">Create New Menu</a>
+                                <a href="{{route('create.menu')}}">Create New Menu</a>
                             </li>
                             <li class="list-group-item">
-                                <a href="{{route('tag.create')}}">Create New Tag</a>
+                                <a href="{{route('create.tag')}}">Create New Tag</a>
                             </li>
                             <li class="list-group-item">
-                                <a href="{{ route('category.create') }}">Create New Category</a>
+                                <a href="{{ route('create.category') }}">Create New Category</a>
                             </li>
                             <li class="list-group-item">
-                                <a href="{{ route('post.create') }}">Create New Post</a>
+                                <a href="{{ route('create.post') }}">Create New Post</a>
                             </li>
                             <li class="list-group-item">
                                 <a href="{{route('menus')}}">All menus</a>
@@ -137,12 +126,12 @@
                 @endif
                 <div class="container col-md-9">
                     <main class="py-4">
-                        @include('admin.includes.error')
+                        @include('includes.error')
                         @yield('content')                                  
                     </main>
                 </div>
             </div>
-        </div>    
+        </div>   
     </div>
 </body>
 </html>

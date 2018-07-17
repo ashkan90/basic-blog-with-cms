@@ -8,7 +8,7 @@
 		  </div>
 
 		  <div class="card-body">
-			    <form method="post" action="{{ route('tag.update', ['id' => $tag->id]) }}" >
+			    <form method="post" action="{{ route('update.tag', ['id' => $tag->id]) }}" >
 			    	{{csrf_field()}}
 			    	<div class="form-group">
 			    		<label for="tag">Tag Name</label>

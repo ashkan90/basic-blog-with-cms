@@ -8,7 +8,7 @@
 		  </div>
 
 		  <div class="card-body">
-			    <form method="post" action="{{ route('post.store') }}" enctype="multipart/form-data">
+			    <form method="post" action="{{ route('store.post') }}" enctype="multipart/form-data">
 			    	{{csrf_field()}}
 			    	<div class="form-group">
 			    		<label for="title">Title</label>
